@@ -1,6 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
-import { StyleSheet, Text, TextInput, View } from 'react-native';
+import * as eva from '@eva-design/eva';
+import { StyleSheet, TextInput, View, TouchableOpacity } from 'react-native';
+import { ApplicationProvider, Layout, Text } from '@ui-kitten/components';
+
 
 export default function App() {
 
@@ -8,11 +11,12 @@ export default function App() {
     const [password, setPassword] = useState('');
     
   return (
+    <ApplicationProvider {...eva} theme={eva.light}>
     <View style={styles.container}>
-      <View>
+      <View View style={styles.inputView}> 
         <TextInput
           style={styles.TextInput}
-          placeholder="Email."
+          placeholder="Email or Number Phone."
           placeholderTextColor="#003f5c"
           onChangeText={(email) => setEmail(email)}
         />
@@ -26,7 +30,18 @@ export default function App() {
           onChangeText={(password) => setPassword(password)}
         /> 
       </View>
+      
+      <TouchableOpacity>
+        <Text style={styles.forgot_button}>Forgot Password?</Text> 
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.loginBtn}>
+        <Text style={styles.loginText} category='h1'
+        >LOGIN</Text> 
+      </TouchableOpacity>
+
     </View>
+  </ApplicationProvider>
+    
   );
 }
 
@@ -40,17 +55,31 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   inputView: {
-    backgroundColor: "#FFC0CB",
+    backgroundColor: "#b6e8f3f0",
     borderRadius: 30,
-    width: "70%",
-    height: 45,
+    width: "80%",
+    height: 50,
     marginBottom: 20,
     alignItems: "center",
   },
   TextInput: {
     height: 50,
-    flex: 1,
+    //flex: 1,
     padding: 10,
-    marginLeft: 20,
+    //marginLeft: 20,
+
+  },
+  forgot_button: {
+    height: 30,
+    marginBottom: 30,
+  },
+  loginBtn:
+  {
+    width:"60%",
+    borderRadius:25,
+    height:50,
+    alignItems:"center",
+    justifyContent:"center",
+    backgroundColor:"#25a2d3f0",
   }
 });
